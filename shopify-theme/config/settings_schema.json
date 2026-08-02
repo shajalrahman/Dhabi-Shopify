@@ -1,0 +1,211 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "DhabiCart",
+    "theme_version": "1.0.0",
+    "theme_author": "DhabiCart",
+    "theme_documentation_url": "https://dhabicart.com/docs",
+    "theme_support_url": "https://dhabicart.com/support"
+  },
+  {
+    "name": "Logo & Branding",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo (light / white version)"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_dark",
+        "label": "Logo (dark version for mobile menu)"
+      },
+      {
+        "type": "range",
+        "id": "logo_height",
+        "label": "Logo height (px)",
+        "min": 20,
+        "max": 80,
+        "step": 2,
+        "default": 42,
+        "unit": "px"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_navy",
+        "label": "Navy (Primary)",
+        "default": "#1B2B5E"
+      },
+      {
+        "type": "color",
+        "id": "color_navy_dark",
+        "label": "Navy Dark",
+        "default": "#101D42"
+      },
+      {
+        "type": "color",
+        "id": "color_navy_deeper",
+        "label": "Navy Deeper",
+        "default": "#0A1330"
+      },
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "Gold (Accent)",
+        "default": "#D4A745"
+      },
+      {
+        "type": "color",
+        "id": "color_gold_light",
+        "label": "Gold Light",
+        "default": "#E8C96E"
+      },
+      {
+        "type": "color",
+        "id": "color_noon_yellow",
+        "label": "Noon Yellow",
+        "default": "#FEEE00"
+      },
+      {
+        "type": "header",
+        "content": "Semantic Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_success",
+        "label": "Success",
+        "default": "#22C55E"
+      },
+      {
+        "type": "color",
+        "id": "color_danger",
+        "label": "Danger",
+        "default": "#EF4444"
+      },
+      {
+        "type": "color",
+        "id": "color_warning",
+        "label": "Warning",
+        "default": "#F59E0B"
+      },
+      {
+        "type": "color",
+        "id": "color_info",
+        "label": "Info",
+        "default": "#3B82F6"
+      },
+      {
+        "type": "header",
+        "content": "Neutrals"
+      },
+      {
+        "type": "color",
+        "id": "color_body_bg",
+        "label": "Body Background",
+        "default": "#F8F9FC"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text",
+        "label": "Body Text",
+        "default": "#111827"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "inter_n7"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter",
+        "label": "Twitter / X URL"
+      },
+      {
+        "type": "url",
+        "id": "social_linkedin",
+        "label": "LinkedIn URL"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_drawer_enabled",
+        "label": "Enable cart drawer",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_empty_message",
+        "label": "Empty cart message",
+        "default": "Your cart is empty"
+      },
+      {
+        "type": "text",
+        "id": "cart_empty_submessage",
+        "label": "Empty cart sub-message",
+        "default": "Add some Eco Woltt products to get started!"
+      }
+    ]
+  },
+  {
+    "name": "Currency",
+    "settings": [
+      {
+        "type": "text",
+        "id": "currency_code",
+        "label": "Currency display code",
+        "default": "AED",
+        "info": "Displayed next to prices. Actual currency is set in Shopify settings."
+      }
+    ]
+  }
+]

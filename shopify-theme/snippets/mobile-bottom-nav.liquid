@@ -1,0 +1,30 @@
+{% comment %}
+  Renders the floating curved mobile bottom navigation.
+{% endcomment %}
+
+<div class="mobile-bottom-nav">
+  <a href="{{ routes.account_url }}" class="mobile-bottom-nav__item">
+    {% render 'icon-svg', icon: 'orders' %}
+    <span>{{ 'header.orders' | t }}</span>
+  </a>
+  <button class="mobile-bottom-nav__item" id="mobileNavCat">
+    {% render 'icon-svg', icon: 'category' %}
+    <span>Categories</span>
+  </button>
+
+  <a href="{{ routes.root_url }}" class="mobile-bottom-nav__center-item" aria-label="Home">
+    <div class="mobile-bottom-nav__center-btn">
+      {% render 'icon-svg', icon: 'home' %}
+    </div>
+  </a>
+
+  <button class="mobile-bottom-nav__item" id="mobileNavCart">
+    {% render 'icon-svg', icon: 'cart' %}
+    <span>{{ 'header.cart' | t }}</span>
+    <span class="mobile-bottom-nav__badge" id="mobileCartBadge"{% if cart.item_count == 0 %} style="opacity: 0;"{% else %} style="opacity: 1;"{% endif %}>{{ cart.item_count }}</span>
+  </button>
+  <a href="{{ routes.account_url }}" class="mobile-bottom-nav__item">
+    {% render 'icon-svg', icon: 'user' %}
+    <span>Account</span>
+  </a>
+</div>

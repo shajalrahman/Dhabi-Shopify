@@ -1,0 +1,37 @@
+{%- if section.settings.show_announcement -%}
+  <div class="announce-bar" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
+    {{ section.settings.text }}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Free Express Delivery across UAE for orders over 100 AED"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#101D42"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    }
+  ]
+}
+{% endschema %}

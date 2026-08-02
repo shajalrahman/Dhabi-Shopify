@@ -1,0 +1,67 @@
+<div class="cart-page container section-padded">
+  <h1 class="cart-page__title">{{ 'cart.title' | t }}</h1>
+
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" novalidate>
+      <div class="cart-page__items">
+        {%- for item in cart.items -%}
+          <div class="cart-item" style="align-items: center;">
+            <div class="cart-item__img" style="width: 80px; height: 80px;">
+              {%- if item.image -%}
+                <img src="{{ item.image | image_url: width: 120 }}" alt="{{ item.title | escape }}" width="{{ item.image.width }}" height="{{ item.image.height }}" loading="lazy">
+              {%- endif -%}
+            </div>
+            <div class="cart-item__info">
+              <a href="{{ item.url }}" class="cart-item__title" style="font-size: 1rem;">{{ item.product.title }}</a>
+              {%- unless item.product.has_only_default_variant -%}
+                <div style="font-size: 0.85rem; color: var(--gray-500); margin-bottom: 8px;">{{ item.variant.title }}</div>
+              {%- endunless -%}
+              
+              <div style="display:flex; align-items:center; gap: 24px; margin-top: 12px;">
+                <div class="cart-item__price" style="font-size: 1rem;">{{ item.final_price | money }}</div>
+                
+                <div class="cart-item__qty">
+                  <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" class="cart-item__qty-btn">-</a>
+                  <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity" style="width: 40px; text-align: center; border: 1px solid var(--gray-200); border-radius: 4px;">
+                  <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" class="cart-item__qty-btn">+</a>
+                </div>
+                
+                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" class="cart-item__remove" style="margin: 0; font-size: 0.85rem;">{{ 'cart.remove' | t }}</a>
+              </div>
+            </div>
+            
+            <div style="font-weight: 800; color: var(--navy); margin-left: auto;">
+              {{ item.final_line_price | money }}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="cart-page__footer">
+        <div class="cart-page__summary">
+          <div class="cart-page__total">
+            <span>{{ 'cart.subtotal' | t }}</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--gray-500); margin-bottom: 20px;">Taxes and shipping calculated at checkout</p>
+          <button type="submit" name="update" style="background: var(--gray-100); color: var(--gray-800); width: 100%; height: 44px; font-weight: 600; border-radius: var(--radius-sm); margin-bottom: 12px;">Update Cart</button>
+          <button type="submit" name="checkout" class="cart-page__checkout-btn">
+            {{ 'cart.checkout' | t }}
+          </button>
+        </div>
+      </div>
+    </form>
+  {%- else -%}
+    <div class="cart-page__empty">
+      <div style="margin-bottom: 24px;">{% render 'icon-svg', icon: 'cart' %}</div>
+      <h2 style="margin-bottom: 12px;">{{ 'cart.empty' | t }}</h2>
+      <a href="{{ routes.all_products_collection_url }}" class="page-404__btn">{{ 'cart.continue_shopping' | t }}</a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart Page"
+}
+{% endschema %}

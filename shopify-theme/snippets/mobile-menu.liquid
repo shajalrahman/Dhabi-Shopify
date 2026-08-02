@@ -1,0 +1,27 @@
+{% comment %}
+  Renders the mobile navigation drawer.
+{% endcomment %}
+
+<div class="cart-overlay" id="mobileOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu__header">
+    {%- if settings.logo_dark != blank -%}
+      <img src="{{ settings.logo_dark | image_url: width: 300 }}" alt="{{ shop.name | escape }}" width="{{ settings.logo_dark.width }}" height="{{ settings.logo_dark.height }}" loading="lazy">
+    {%- else -%}
+      <strong style="font-size: 1.1rem; color: var(--navy);">{{ shop.name }}</strong>
+    {%- endif -%}
+    <button class="cart-drawer__close" id="mobileMenuClose" aria-label="{{ 'accessibility.close' | t }}">
+      {% render 'icon-svg', icon: 'close' %}
+    </button>
+  </div>
+  <div class="mobile-menu__links">
+    {%- if section.settings.menu != blank -%}
+      {%- for link in linklists[section.settings.menu].links -%}
+        <a href="{{ link.url }}" class="mobile-menu__link">{{ link.title }}</a>
+      {%- endfor -%}
+    {%- else -%}
+      <a href="{{ routes.root_url }}" class="mobile-menu__link">Home</a>
+      <a href="{{ routes.all_products_collection_url }}" class="mobile-menu__link">Shop</a>
+    {%- endif -%}
+  </div>
+</div>

@@ -1,0 +1,64 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_vendor": true,
+        "show_offers": true,
+        "offer_1_text": "Lowest Price in 30 Days",
+        "offer_2_text": "#1 Best Seller in Mobile Accessories",
+        "show_delivery": true,
+        "delivery_date_text": "Tomorrow, Aug 12",
+        "delivery_countdown_text": "Order within 4 hrs 12 mins",
+        "recent_sold_text": "🔥 40+ sold recently",
+        "seller_name": "Eco Woltt UAE",
+        "seller_rating": "4.9",
+        "seller_metric_1_text": "Overall Rating",
+        "seller_metric_1_percent": "96",
+        "seller_metric_1_label": "Excellent",
+        "seller_metric_2_text": "Shipping Speed",
+        "seller_metric_2_percent": "100",
+        "seller_metric_2_label": "Outstanding",
+        "show_low_return": true,
+        "more_offers_text": "4 More Offers Available",
+        "promo_text": "<p>Save extra 10% with <span>CODE: ECO10</span></p>"
+      },
+      "blocks": {
+        "policy_1": {
+          "type": "policy",
+          "settings": {
+            "text": "1 Year Official Warranty"
+          }
+        },
+        "policy_2": {
+          "type": "policy",
+          "settings": {
+            "text": "Free Returns within 7 Days"
+          }
+        },
+        "policy_3": {
+          "type": "policy",
+          "settings": {
+            "text": "Secure & Encrypted Checkout"
+          }
+        }
+      },
+      "block_order": [
+        "policy_1",
+        "policy_2",
+        "policy_3"
+      ]
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "title": "You May Also Like",
+        "products_to_show": 8
+      }
+    }
+  },
+  "order": [
+    "main",
+    "recommendations"
+  ]
+}

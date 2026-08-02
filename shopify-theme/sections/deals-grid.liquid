@@ -1,0 +1,124 @@
+<section class="deals-section container section-padded fade-up">
+  <div class="deals-grid">
+    
+    {%- comment -%} Flash Deals Box {%- endcomment -%}
+    <div class="deal-box">
+      <div class="deal-box__header">
+        <div class="deal-box__title">{{ 'products.flash_deals' | t }}</div>
+        {%- if section.settings.flash_end_time != blank -%}
+          <div class="flash-timer" id="flashTimer" data-endtime="{{ section.settings.flash_end_time }}">
+            <span class="flash-timer__digit" id="flashH">00</span><span class="flash-timer__sep">:</span>
+            <span class="flash-timer__digit" id="flashM">00</span><span class="flash-timer__sep">:</span>
+            <span class="flash-timer__digit" id="flashS">00</span>
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="deal-box__body">
+        {%- if section.settings.flash_product != blank -%}
+          {% render 'deal-product-card', product: section.settings.flash_product %}
+        {%- else -%}
+          <div style="text-align: center; padding: 40px; color: var(--gray-400);">Select a product</div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} Best Seller Box {%- endcomment -%}
+    <div class="deal-box">
+      <div class="deal-box__header">
+        <div class="deal-box__title">{{ 'products.best_seller' | t }}</div>
+      </div>
+      <div class="deal-box__body">
+        {%- if section.settings.bestseller_product != blank -%}
+          {% render 'deal-product-card', product: section.settings.bestseller_product %}
+        {%- else -%}
+          <div style="text-align: center; padding: 40px; color: var(--gray-400);">Select a product</div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} Ad Banner Box {%- endcomment -%}
+    <a href="{{ section.settings.ad_link | default: '#' }}" class="deal-ad">
+      {%- if section.settings.ad_image != blank -%}
+        <img src="{{ section.settings.ad_image | image_url: width: 600 }}" alt="Promo Ad" width="{{ section.settings.ad_image.width }}" height="{{ section.settings.ad_image.height }}" loading="lazy">
+      {%- else -%}
+        <div style="width: 100%; height: 100%; min-height: 300px; background: var(--navy); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Promo Banner</div>
+      {%- endif -%}
+    </a>
+
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const timerEl = document.getElementById('flashTimer');
+    if (!timerEl) return;
+    
+    const endTimeStr = timerEl.dataset.endtime;
+    const endTime = new Date(endTimeStr).getTime();
+    
+    if (isNaN(endTime)) return;
+
+    function updateTimer() {
+      const now = new Date().getTime();
+      const distance = endTime - now;
+
+      if (distance < 0) {
+        document.getElementById('flashH').textContent = '00';
+        document.getElementById('flashM').textContent = '00';
+        document.getElementById('flashS').textContent = '00';
+        return;
+      }
+
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('flashH').textContent = String(hours).padStart(2, '0');
+      document.getElementById('flashM').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('flashS').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Deals Grid",
+  "settings": [
+    {
+      "type": "product",
+      "id": "flash_product",
+      "label": "Flash Deal Product"
+    },
+    {
+      "type": "text",
+      "id": "flash_end_time",
+      "label": "Flash Deal End Time",
+      "info": "Format: YYYY-MM-DD HH:MM:SS (e.g., 2026-12-31 23:59:59)",
+      "default": "2026-12-31 23:59:59"
+    },
+    {
+      "type": "product",
+      "id": "bestseller_product",
+      "label": "Best Seller Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "ad_image",
+      "label": "Ad Banner Image"
+    },
+    {
+      "type": "url",
+      "id": "ad_link",
+      "label": "Ad Banner Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Deals Grid"
+    }
+  ]
+}
+{% endschema %}

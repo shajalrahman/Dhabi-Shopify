@@ -1,0 +1,11 @@
+<div class="page-404 container">
+  <div class="page-404__title">404</div>
+  <div class="page-404__message">{{ '404.message' | t }}</div>
+  <a href="{{ routes.root_url }}" class="page-404__btn">{{ '404.back_home' | t }}</a>
+</div>
+
+{% schema %}
+{
+  "name": "404 Error Page"
+}
+{% endschema %}

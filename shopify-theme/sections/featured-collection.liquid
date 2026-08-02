@@ -1,0 +1,98 @@
+<section class="product-slider-section container section-padded fade-up">
+  <div class="section-header">
+    <div>
+      <h2 class="section-header__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <div class="section-header__subtitle">{{ section.settings.subtitle }}</div>
+      {%- endif -%}
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 16px;">
+      {%- if section.settings.collection != blank -%}
+        <a href="{{ section.settings.collection.url }}" class="section-header__link">
+          {{ 'general.view_all' | t }}
+          {% render 'icon-svg', icon: 'chevron-right' %}
+        </a>
+      {%- endif -%}
+
+      <div class="slider-arrows">
+        <button class="slider-arrow" id="{{ section.id }}-prev" aria-label="Previous">
+          {% render 'icon-svg', icon: 'chevron-left' %}
+        </button>
+        <button class="slider-arrow" id="{{ section.id }}-next" aria-label="Next">
+          {% render 'icon-svg', icon: 'chevron-right' %}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-slider__track" id="{{ section.id }}-track">
+    {%- assign collection = section.settings.collection -%}
+    {%- if collection != blank and collection.products_count > 0 -%}
+      {%- for product in collection.products limit: section.settings.products_to_show -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..8) -%}
+        <div class="product-card" style="padding: 20px; text-align: center; background: #F9FAFB;">
+          <div style="width: 100px; height: 100px; background: #E5E7EB; margin: 0 auto 10px; border-radius: 8px;"></div>
+          <div style="height: 14px; background: #E5E7EB; margin-bottom: 6px; border-radius: 4px;"></div>
+          <div style="height: 14px; background: #E5E7EB; width: 60%; margin: 0 auto; border-radius: 4px;"></div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('{{ section.id }}-track');
+    const prev = document.getElementById('{{ section.id }}-prev');
+    const next = document.getElementById('{{ section.id }}-next');
+    
+    if (track && prev && next) {
+      const scrollAmt = 300;
+      prev.addEventListener('click', () => track.scrollBy({ left: -scrollAmt, behavior: 'smooth' }));
+      next.addEventListener('click', () => track.scrollBy({ left: scrollAmt, behavior: 'smooth' }));
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Featured Collection (Row)",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Recommended For You"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Based on your recent activity"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Maximum products to show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection Slider"
+    }
+  ]
+}
+{% endschema %}

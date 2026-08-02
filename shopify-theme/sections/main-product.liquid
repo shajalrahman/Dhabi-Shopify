@@ -1,0 +1,395 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<section class="container section-padded" style="margin-top: 16px;">
+  
+  <div class="breadcrumbs">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span class="sep">/</span>
+    {%- if collection -%}
+      <a href="{{ collection.url }}">{{ collection.title }}</a>
+      <span class="sep">/</span>
+    {%- endif -%}
+    <span class="current">{{ product.title }}</span>
+  </div>
+
+  <div class="pdp-main-wrapper">
+    <div class="pdp-grid">
+      
+      {%- comment -%} COLUMN 1: GALLERY {%- endcomment -%}
+      <div class="gallery-col">
+        <div class="thumbs-stack">
+          {%- for image in product.images -%}
+            <div class="thumb-box {% if forloop.first %}is-active{% endif %}" data-img="{{ image | image_url: width: 800 }}">
+              <img src="{{ image | image_url: width: 100 }}" alt="{{ image.alt | escape }}" loading="lazy" width="{{ image.width }}" height="{{ image.height }}">
+            </div>
+          {%- endfor -%}
+        </div>
+        
+        <div class="main-img-box">
+          <button class="pdp-wish-btn" aria-label="Add to wishlist">
+            {% render 'icon-svg', icon: 'heart' %}
+          </button>
+          <img id="mainProductImg" src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | escape }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
+        </div>
+      </div>
+
+      {%- comment -%} COLUMN 2: INFO {%- endcomment -%}
+      <div class="info-col">
+        {%- if section.settings.show_vendor -%}
+          <a href="{{ routes.all_products_collection_url }}?filter.p.vendor={{ product.vendor | url_encode }}" class="brand-link">
+            {{ product.vendor }}
+          </a>
+        {%- endif -%}
+        
+        <h1 class="pdp-title">{{ product.title }}</h1>
+        
+
+
+        <div class="price-block">
+          <div class="price-main-row">
+            <div class="price-current">
+              <span class="currency">{{ settings.currency_code }}</span> <span id="pdpPriceNow">{{ current_variant.price | money | remove: settings.currency_code | strip }}</span>
+            </div>
+            {%- if current_variant.compare_at_price > current_variant.price -%}
+              <div class="price-was" id="pdpPriceWas">{{ current_variant.compare_at_price | money }}</div>
+              {%- assign discount = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round -%}
+              <div class="discount-badge" id="pdpDiscountBadge">{{ discount }}% OFF</div>
+            {%- endif -%}
+          </div>
+          {%- if section.settings.recent_sold_text != blank -%}
+            <div class="recent-sold-badge">{{ section.settings.recent_sold_text }}</div>
+          {%- endif -%}
+        </div>
+
+        {%- unless product.has_only_default_variant -%}
+          <div class="variant-section">
+            {%- for option in product.options_with_values -%}
+              <div class="variant-label">{{ option.name }}</div>
+              <div class="variant-options">
+                {%- for value in option.values -%}
+                  <button type="button" class="variant-pill {% if option.selected_value == value %}is-active{% endif %}" data-option-index="{{ forloop.parentloop.index }}" data-value="{{ value | escape }}">
+                    {{ value }}
+                  </button>
+                {%- endfor -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endunless -%}
+
+        {%- if section.settings.show_offers -%}
+          {%- if section.settings.offer_1_text != blank -%}
+            <div class="offer-box offer-box--green">
+              <div class="offer-left">
+                <div class="offer-icon">✓</div>
+                <span>{{ section.settings.offer_1_text }}</span>
+              </div>
+              {% render 'icon-svg', icon: 'chevron-right' %}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.offer_2_text != blank -%}
+            <div class="offer-box offer-box--purple">
+              <div class="offer-left">
+                <div class="offer-icon">🏆</div>
+                <span>{{ section.settings.offer_2_text }}</span>
+              </div>
+              {% render 'icon-svg', icon: 'chevron-right' %}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if section.settings.show_delivery -%}
+          <div class="delivery-card">
+            <div class="delivery-card-title">DELIVERY INFORMATION</div>
+            <div class="express-row">
+              <div class="express-badge-wrap">
+                <span class="express-badge">EXPRESS</span>
+                <span class="delivery-date">{{ section.settings.delivery_date_text | default: 'Tomorrow, Aug 12' }}</span>
+              </div>
+              {%- if section.settings.delivery_countdown_text != blank -%}
+                <div class="countdown-timer">{{ section.settings.delivery_countdown_text }}</div>
+              {%- endif -%}
+            </div>
+            <div class="supermall-row">
+              <span style="display:flex;align-items:center;gap:6px;"><span class="supermall-badge">SUPERMALL</span> Fulfilled by {{ shop.name }}</span>
+              <a href="#" style="color:var(--noon-blue);font-weight:700;">Details</a>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} COLUMN 3: BUY BOX {%- endcomment -%}
+      <div class="buybox-col">
+        <div class="buybox-card">
+          
+          <div class="seller-row">
+            <div class="seller-left">
+              <div class="seller-icon">{{ section.settings.seller_name | slice: 0 | upcase | default: 'E' }}</div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--gray-500);">Sold by</div>
+                <div class="seller-name">{{ section.settings.seller_name | default: 'Eco Woltt UAE' }}</div>
+              </div>
+            </div>
+            {%- if section.settings.seller_rating != blank -%}
+              <div class="seller-score">
+                <span style="font-size: 1.1rem; margin-right: 2px;">★</span> {{ section.settings.seller_rating }}
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- if section.settings.seller_metric_1_text != blank -%}
+            <div class="metric-item">
+              <span>{{ section.settings.seller_metric_1_text }}</span>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:{{ section.settings.seller_metric_1_percent | default: '96' }}%;"></div></div>
+                <span class="metric-value">{{ section.settings.seller_metric_1_label }}</span>
+              </div>
+            </div>
+          {%- endif -%}
+          
+          {%- if section.settings.seller_metric_2_text != blank -%}
+            <div class="metric-item">
+              <span>{{ section.settings.seller_metric_2_text }}</span>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:{{ section.settings.seller_metric_2_percent | default: '100' }}%;"></div></div>
+                <span class="metric-value">{{ section.settings.seller_metric_2_label }}</span>
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.show_low_return -%}
+            <div class="low-return-pill">Low Return Rate on this item</div>
+          {%- endif -%}
+          
+          {%- if section.settings.more_offers_text != blank -%}
+            <div class="more-offers-btn">
+              <span>{{ section.settings.more_offers_text }}</span>
+              {% render 'icon-svg', icon: 'chevron-right' %}
+            </div>
+          {%- endif -%}
+
+          <div class="policy-list">
+            {%- for block in section.blocks -%}
+              <div class="policy-item" {{ block.shopify_attributes }}>
+                {% render 'icon-svg', icon: 'check' %}
+                {{ block.settings.text }}
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <form action="{{ routes.cart_add_url }}" method="post" id="addToCartForm" class="add-to-cart-form">
+            <input type="hidden" name="id" id="productVariantId" value="{{ current_variant.id }}">
+            <input type="hidden" name="quantity" value="1" id="productQuantity">
+            
+            <button type="button" class="add-to-cart-btn" id="addToCartBtn" {% unless current_variant.available %}disabled{% endunless %}>
+              {% if current_variant.available %}
+                {{ 'products.add_to_cart' | t }}
+              {% else %}
+                {{ 'products.sold_out' | t }}
+              {% endif %}
+            </button>
+          </form>
+
+        </div>
+
+        {%- if section.settings.promo_text != blank -%}
+          <div class="side-promo-card">
+            {%- if section.settings.promo_image != blank -%}
+              <img src="{{ section.settings.promo_image | image_url: width: 88 }}" alt="Promo" width="{{ section.settings.promo_image.width }}" height="{{ section.settings.promo_image.height }}" loading="lazy">
+            {%- else -%}
+              <div style="width: 44px; height: 44px; background: var(--gray-200); border-radius: 8px;"></div>
+            {%- endif -%}
+            <div class="promo-text">
+              {{ section.settings.promo_text }}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+
+  {%- comment -%} TABS (DESCRIPTION / SPECS) {%- endcomment -%}
+  <div class="pdp-details-tabs">
+    <div class="tab-headers">
+      <div class="tab-btn is-active" data-tab="overview">Overview</div>
+      <div class="tab-btn" data-tab="specifications">Specifications</div>
+      <div class="tab-btn" data-tab="reviews">Reviews</div>
+    </div>
+    
+    <div class="tab-body">
+      <div class="tab-panel is-active" id="tabOverview">
+        {{ product.description }}
+      </div>
+      
+      <div class="tab-panel" id="tabSpecifications">
+        {%- if product.metafields.custom.specifications != blank -%}
+          {{ product.metafields.custom.specifications | metafield_tag }}
+        {%- else -%}
+          <table class="spec-table">
+            <tbody>
+              <tr><td>Brand</td><td>{{ product.vendor }}</td></tr>
+              <tr><td>Product Type</td><td>{{ product.type | default: 'Accessory' }}</td></tr>
+              <tr><td>SKU</td><td id="pdpSku">{{ current_variant.sku | default: 'N/A' }}</td></tr>
+              <tr><td>Warranty</td><td>1 Year Official Warranty</td></tr>
+            </tbody>
+          </table>
+        {%- endif -%}
+      </div>
+      
+      <div class="tab-panel" id="tabReviews">
+        <p style="color: var(--gray-500); padding: 20px 0;">Customer reviews will appear here.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+{%- comment -%} Store product data for variant switching script in theme.js {%- endcomment -%}
+<script type="application/json" id="ProductJson-{{ section.id }}">
+  {{ product | json }}
+</script>
+
+{% schema %}
+{
+  "name": "Product Information",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_offers",
+      "label": "Show offer boxes",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_delivery",
+      "label": "Show delivery card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "delivery_date_text",
+      "label": "Express Delivery Date Text",
+      "default": "Tomorrow, Aug 12"
+    },
+    {
+      "type": "text",
+      "id": "recent_sold_text",
+      "label": "Recent Sold Badge Text",
+      "default": "🔥 40+ sold recently"
+    },
+    {
+      "type": "text",
+      "id": "offer_1_text",
+      "label": "Offer 1 Text",
+      "default": "Lowest Price in 30 Days"
+    },
+    {
+      "type": "text",
+      "id": "offer_2_text",
+      "label": "Offer 2 Text",
+      "default": "#1 Best Seller in Mobile Accessories"
+    },
+    {
+      "type": "text",
+      "id": "delivery_countdown_text",
+      "label": "Delivery Countdown Text",
+      "default": "Order within 4 hrs 12 mins"
+    },
+    {
+      "type": "header",
+      "content": "Buy Box Settings"
+    },
+    {
+      "type": "text",
+      "id": "seller_name",
+      "label": "Seller Name",
+      "default": "Eco Woltt UAE"
+    },
+    {
+      "type": "text",
+      "id": "seller_rating",
+      "label": "Seller Rating",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "seller_metric_1_text",
+      "label": "Seller Metric 1 Title",
+      "default": "Overall Rating"
+    },
+    {
+      "type": "text",
+      "id": "seller_metric_1_percent",
+      "label": "Seller Metric 1 Percentage (0-100)",
+      "default": "96"
+    },
+    {
+      "type": "text",
+      "id": "seller_metric_1_label",
+      "label": "Seller Metric 1 Label",
+      "default": "Excellent"
+    },
+    {
+      "type": "text",
+      "id": "seller_metric_2_text",
+      "label": "Seller Metric 2 Title",
+      "default": "Shipping Speed"
+    },
+    {
+      "type": "text",
+      "id": "seller_metric_2_percent",
+      "label": "Seller Metric 2 Percentage (0-100)",
+      "default": "100"
+    },
+    {
+      "type": "text",
+      "id": "seller_metric_2_label",
+      "label": "Seller Metric 2 Label",
+      "default": "Outstanding"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_low_return",
+      "label": "Show Low Return Rate badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "more_offers_text",
+      "label": "More Offers Text",
+      "default": "4 More Offers Available"
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_image",
+      "label": "Promo Image"
+    },
+    {
+      "type": "richtext",
+      "id": "promo_text",
+      "label": "Promo Text",
+      "default": "<p>Save extra 10% with <span>CODE: ECO10</span></p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "policy",
+      "name": "Policy",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Policy Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

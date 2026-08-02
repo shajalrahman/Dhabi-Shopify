@@ -1,0 +1,72 @@
+<section class="products-section container section-padded fade-up">
+  <div class="section-header">
+    <div>
+      <h2 class="section-header__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <div class="section-header__subtitle">{{ section.settings.subtitle }}</div>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.collection != blank -%}
+      <a href="{{ section.settings.collection.url }}" class="section-header__link">
+        {{ 'general.view_all' | t }}
+        {% render 'icon-svg', icon: 'chevron-right' %}
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="products-grid">
+    {%- assign collection = section.settings.collection -%}
+    {%- if collection != blank and collection.products_count > 0 -%}
+      {%- for product in collection.products limit: section.settings.max_products -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..8) -%}
+        <div class="product-card" style="padding: 20px; text-align: center; background: #F9FAFB;">
+          <div style="width: 100px; height: 100px; background: #E5E7EB; margin: 0 auto 10px; border-radius: 8px;"></div>
+          <div style="height: 14px; background: #E5E7EB; margin-bottom: 6px; border-radius: 4px;"></div>
+          <div style="height: 14px; background: #E5E7EB; width: 60%; margin: 0 auto; border-radius: 4px;"></div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "All Products"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Explore our full range"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Maximum products to show",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Grid"
+    }
+  ]
+}
+{% endschema %}

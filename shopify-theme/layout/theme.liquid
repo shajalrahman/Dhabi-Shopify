@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>
+    {%- if page_title -%}
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    {%- else -%}
+      {{ shop.name }}
+    {%- endif -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {%- if canonical_url -%}
+    <link rel="canonical" href="{{ canonical_url }}">
+  {%- endif -%}
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Theme CSS -->
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <!-- Dynamic CSS Variables from Theme Settings -->
+  <style>
+    :root {
+      --navy:        {{ settings.color_navy }};
+      --navy-dark:   {{ settings.color_navy_dark }};
+      --navy-deeper: {{ settings.color_navy_deeper }};
+      --gold:        {{ settings.color_gold }};
+      --gold-light:  {{ settings.color_gold_light }};
+      --noon-yellow: {{ settings.color_noon_yellow }};
+      --success:     {{ settings.color_success }};
+      --danger:      {{ settings.color_danger }};
+      --warning:     {{ settings.color_warning }};
+      --info:        {{ settings.color_info }};
+      --body-bg:     {{ settings.color_body_bg }};
+      --body-text:   {{ settings.color_body_text }};
+    }
+  </style>
+
+  {{ content_for_header }}
+
+  {%- comment -%} Preload critical assets {%- endcomment -%}
+  {{ 'theme.js' | asset_url | preload_tag: as: 'script' }}
+  {{ 'cart.js' | asset_url | preload_tag: as: 'script' }}
+</head>
+<body class="template-{{ template.name | handle }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix | handle }}{% endif %}">
+
+  <a class="skip-link" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+
+  {%- comment -%} ===== GLOBAL SECTIONS ===== {%- endcomment -%}
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
+
+  {%- comment -%} ===== MAIN CONTENT ===== {%- endcomment -%}
+  <main id="MainContent" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {%- comment -%} ===== MARQUEE BANNER (only on homepage) ===== {%- endcomment -%}
+  {%- if template.name == 'index' -%}
+    {% section 'marquee-banner' %}
+  {%- endif -%}
+
+  {%- comment -%} ===== FOOTER ===== {%- endcomment -%}
+  {% section 'footer' %}
+
+  {%- comment -%} ===== GLOBAL OVERLAYS & DRAWERS ===== {%- endcomment -%}
+  {% render 'cart-drawer' %}
+  {% render 'mobile-menu' %}
+  {% render 'toast' %}
+  {% render 'mobile-bottom-nav' %}
+
+  {%- comment -%} ===== JAVASCRIPT ===== {%- endcomment -%}
+  <script>
+    /* Expose Shopify cart data for JS */
+    window.DhabiCart = {
+      cartUrl: '{{ routes.cart_url }}',
+      cartAddUrl: '{{ routes.cart_add_url }}',
+      cartChangeUrl: '{{ routes.cart_change_url }}',
+      cartUpdateUrl: '{{ routes.cart_update_url }}',
+      searchUrl: '{{ routes.search_url }}',
+      moneyFormat: {{ shop.money_format | json }},
+      currencyCode: {{ settings.currency_code | json }},
+      cartCount: {{ cart.item_count }},
+      cartDrawerEnabled: {{ settings.cart_drawer_enabled }},
+      emptyCartMessage: {{ settings.cart_empty_message | json }},
+      emptyCartSubmessage: {{ settings.cart_empty_submessage | json }}
+    };
+  </script>
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  <script src="{{ 'cart.js' | asset_url }}" defer></script>
+  <script src="{{ 'predictive-search.js' | asset_url }}" defer></script>
+
+</body>
+</html>

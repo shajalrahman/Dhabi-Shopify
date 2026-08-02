@@ -1,0 +1,141 @@
+{
+  "general": {
+    "shop_name": "ظبي كارت",
+    "currency": "د.إ",
+    "search": "بحث",
+    "search_placeholder": "ما الذي تبحث عنه؟",
+    "view_all": "عرض الكل",
+    "load_more": "تحميل المزيد",
+    "no_results": "لا توجد نتائج",
+    "share": "مشاركة"
+  },
+  "accessibility": {
+    "skip_to_content": "تخطي إلى المحتوى",
+    "close": "إغلاق",
+    "open_menu": "فتح القائمة",
+    "previous_slide": "الشريحة السابقة",
+    "next_slide": "الشريحة التالية",
+    "slide_number": "الشريحة {{ number }}",
+    "decrease_quantity": "تقليل الكمية",
+    "increase_quantity": "زيادة الكمية",
+    "add_to_wishlist": "إضافة إلى قائمة الأمنيات",
+    "compare": "مقارنة",
+    "search": "بحث"
+  },
+  "header": {
+    "deliver_to": "توصيل إلى",
+    "default_city": "دبي",
+    "language": "العربية",
+    "log_in": "تسجيل الدخول",
+    "orders": "الطلبات",
+    "wishlist": "قائمة الأمنيات",
+    "cart": "السلة",
+    "free_delivery_badge": "احصل على <strong>توصيل مجاني</strong> مع ظبي كارت"
+  },
+  "products": {
+    "add_to_cart": "أضف إلى السلة",
+    "added_to_cart": "تمت الإضافة إلى السلة!",
+    "buy_now": "اشترِ الآن",
+    "sold_out": "نفدت الكمية",
+    "unavailable": "غير متوفر",
+    "you_save": "وفّرت",
+    "quantity": "الكمية",
+    "vendor": "المورد",
+    "sku": "رمز المنتج",
+    "type": "النوع",
+    "reviews": "التقييمات",
+    "no_reviews": "لا توجد تقييمات بعد",
+    "be_first_review": "كن أول من يقيّم هذا المنتج!",
+    "description": "الوصف",
+    "specifications": "المواصفات",
+    "customer_reviews": "تقييمات العملاء",
+    "product_details": "تفاصيل المنتج",
+    "color": "اللون",
+    "size_option": "الحجم / الخيار",
+    "recommended_for_you": "موصى به لك",
+    "all_products": "جميع المنتجات",
+    "best_seller": "الأكثر مبيعاً",
+    "flash_deals": "عروض خاطفة",
+    "related_products": "قد يعجبك أيضاً",
+    "free_express_delivery": "توصيل سريع مجاني في جميع أنحاء الإمارات",
+    "order_today_get_by": "اطلب اليوم واستلم بحلول",
+    "sale": "تخفيضات"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "empty": "سلتك فارغة",
+    "empty_message": "أضف بعض منتجات إيكو وولت للبدء!",
+    "total": "المجموع",
+    "subtotal": "المجموع الفرعي",
+    "checkout": "الدفع",
+    "remove": "إزالة",
+    "continue_shopping": "مواصلة التسوق",
+    "item_added": "تمت إضافة \"{{ title }}\" إلى السلة!",
+    "proceed_checkout": "جاري الانتقال إلى الدفع..."
+  },
+  "collections": {
+    "title": "المجموعات",
+    "all": "جميع المنتجات",
+    "sort_by": "ترتيب حسب",
+    "sort_best_selling": "الأكثر مبيعاً",
+    "sort_az": "أبجدياً، أ-ي",
+    "sort_za": "أبجدياً، ي-أ",
+    "sort_price_asc": "السعر، من الأقل إلى الأعلى",
+    "sort_price_desc": "السعر، من الأعلى إلى الأقل",
+    "sort_date_new": "التاريخ، من الأحدث إلى الأقدم",
+    "sort_date_old": "التاريخ، من الأقدم إلى الأحدث",
+    "filter": "تصفية",
+    "clear_filters": "مسح الكل",
+    "products_count": "{{ count }} منتجات",
+    "no_products": "لم يتم العثور على منتجات في هذه المجموعة"
+  },
+  "search": {
+    "title": "بحث",
+    "placeholder": "ما الذي تبحث عنه؟",
+    "no_results": "لا توجد نتائج عن \"{{ query }}\"",
+    "results_count": "{{ count }} نتائج عن \"{{ query }}\"",
+    "suggestions": "اقتراحات"
+  },
+  "customer": {
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "account": "حسابي",
+    "orders": "سجل الطلبات",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "first_name": "الاسم الأول",
+    "last_name": "اسم العائلة",
+    "submit": "إرسال",
+    "forgot_password": "نسيت كلمة المرور؟",
+    "reset_password": "إعادة ضبط كلمة المرور"
+  },
+  "footer": {
+    "brand_description": "الإمارات وما حولها! أحدث منصة ملحقات الهواتف الذكية نمواً في المنطقة. الوجهة الرسمية لمنتجات إيكو وولت من بنوك الطاقة وشواحن السيارات السريعة وحوامل الهواتف والسماعات والحماية.",
+    "keep_in_touch": "ابق على تواصل",
+    "connect_with_us": "تواصل معنا",
+    "newsletter_placeholder": "أدخل بريدك الإلكتروني",
+    "subscribed": "تم الاشتراك في نشرة ظبي كارت الإخبارية! 🎉",
+    "copyright": "© {{ year }} {{ shop_name }} الإمارات. جميع الحقوق محفوظة. بدعم من تقنيات إيكو وولت."
+  },
+  "wishlist": {
+    "added": "تمت الإضافة إلى قائمة الأمنيات",
+    "removed": "تمت الإزالة من قائمة الأمنيات"
+  },
+  "marquee": {
+    "free_shipping": "شحن سريع مجاني في جميع أنحاء الإمارات",
+    "secure_checkout": "دفع آمن ومشفّر 100%",
+    "easy_returns": "إرجاع سهل وبدون حساسية خلال 7 أيام",
+    "customer_support": "خدمة دعم العملاء 24/7"
+  },
+  "pagination": {
+    "previous": "السابق",
+    "next": "التالي",
+    "page": "صفحة {{ number }}"
+  },
+  "404": {
+    "title": "الصفحة غير موجودة",
+    "message": "الصفحة التي تبحث عنها غير موجودة.",
+    "back_home": "العودة للرئيسية"
+  }
+}

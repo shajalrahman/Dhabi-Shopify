@@ -1,0 +1,28 @@
+{% comment %}
+  Renders product price, compare-at price, and savings badge.
+  Accepts:
+  - product: {Object} Product Liquid object
+  - show_savings: {Boolean} Whether to show the savings text below price
+{% endcomment %}
+
+{%- assign price = product.price -%}
+{%- assign compare_at_price = product.compare_at_price -%}
+{%- assign money_price = price | money -%}
+
+<div class="product-card__price">
+  <div class="product-card__price-now">
+    <span class="currency">{{ settings.currency_code }}</span>{{ money_price | remove: settings.currency_code | strip }}
+  </div>
+  {%- if compare_at_price > price -%}
+    <div class="product-card__price-was">
+      {{ compare_at_price | money }}
+    </div>
+  {%- endif -%}
+</div>
+
+{%- if show_savings and compare_at_price > price -%}
+  {%- assign saving_amount = compare_at_price | minus: price -%}
+  <div class="product-card__savings">
+    {{ 'products.you_save' | t }} {{ saving_amount | money }}
+  </div>
+{%- endif -%}

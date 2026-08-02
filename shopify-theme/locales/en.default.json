@@ -1,0 +1,141 @@
+{
+  "general": {
+    "shop_name": "DhabiCart",
+    "currency": "AED",
+    "search": "Search",
+    "search_placeholder": "What are you looking for?",
+    "view_all": "View All",
+    "load_more": "Load More",
+    "no_results": "No results found",
+    "share": "Share"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close": "Close",
+    "open_menu": "Open navigation",
+    "previous_slide": "Previous slide",
+    "next_slide": "Next slide",
+    "slide_number": "Slide {{ number }}",
+    "decrease_quantity": "Decrease quantity",
+    "increase_quantity": "Increase quantity",
+    "add_to_wishlist": "Add to wishlist",
+    "compare": "Compare",
+    "search": "Search"
+  },
+  "header": {
+    "deliver_to": "Deliver to",
+    "default_city": "Dubai",
+    "language": "العربية",
+    "log_in": "Log In",
+    "orders": "Orders",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "free_delivery_badge": "Get <strong>Free Delivery</strong> with DhabiCart"
+  },
+  "products": {
+    "add_to_cart": "Add to Cart",
+    "added_to_cart": "Added to cart!",
+    "buy_now": "Buy Now",
+    "sold_out": "Sold Out",
+    "unavailable": "Unavailable",
+    "you_save": "You save",
+    "quantity": "Quantity",
+    "vendor": "Vendor",
+    "sku": "SKU",
+    "type": "Type",
+    "reviews": "Reviews",
+    "no_reviews": "No reviews yet",
+    "be_first_review": "Be the first to review this product!",
+    "description": "Description",
+    "specifications": "Specifications",
+    "customer_reviews": "Customer Reviews",
+    "product_details": "Product Details",
+    "color": "Color",
+    "size_option": "Size / Option",
+    "recommended_for_you": "Recommended For You",
+    "all_products": "All Products",
+    "best_seller": "Best Seller",
+    "flash_deals": "Flash Deals",
+    "related_products": "You May Also Like",
+    "free_express_delivery": "Free Express Delivery across UAE",
+    "order_today_get_by": "Order today, get it by",
+    "sale": "SALE"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "empty_message": "Add some Eco Woltt products to get started!",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "continue_shopping": "Continue Shopping",
+    "item_added": "\"{{ title }}\" added to cart!",
+    "proceed_checkout": "Proceeding to checkout..."
+  },
+  "collections": {
+    "title": "Collections",
+    "all": "All Products",
+    "sort_by": "Sort by",
+    "sort_best_selling": "Best Selling",
+    "sort_az": "Alphabetically, A-Z",
+    "sort_za": "Alphabetically, Z-A",
+    "sort_price_asc": "Price, low to high",
+    "sort_price_desc": "Price, high to low",
+    "sort_date_new": "Date, new to old",
+    "sort_date_old": "Date, old to new",
+    "filter": "Filter",
+    "clear_filters": "Clear All",
+    "products_count": "{{ count }} products",
+    "no_products": "No products found in this collection"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "What are you looking for?",
+    "no_results": "No results for \"{{ query }}\"",
+    "results_count": "{{ count }} results for \"{{ query }}\"",
+    "suggestions": "Suggestions"
+  },
+  "customer": {
+    "login": "Log In",
+    "register": "Create Account",
+    "logout": "Log Out",
+    "account": "My Account",
+    "orders": "Order History",
+    "email": "Email",
+    "password": "Password",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "submit": "Submit",
+    "forgot_password": "Forgot your password?",
+    "reset_password": "Reset Password"
+  },
+  "footer": {
+    "brand_description": "UAE and Beyond! Established as a prominent and rapidly growing online mobile accessories platform in the region. Official destination for Eco Woltt power banks, fast car chargers, holders, audio gear, and protection.",
+    "keep_in_touch": "Keep in Touch",
+    "connect_with_us": "Connect with us",
+    "newsletter_placeholder": "Enter Your Mail",
+    "subscribed": "Subscribed to DhabiCart newsletter! 🎉",
+    "copyright": "© {{ year }} {{ shop_name }} UAE. All Rights Reserved. Powered by Eco Woltt Technologies."
+  },
+  "wishlist": {
+    "added": "Added to wishlist",
+    "removed": "Removed from wishlist"
+  },
+  "marquee": {
+    "free_shipping": "Free Express Shipping Across UAE",
+    "secure_checkout": "100% Encrypted & Secure Checkout",
+    "easy_returns": "7-Day Easy Hassle-Free Returns",
+    "customer_support": "24/7 Customer Support Service"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{ number }}"
+  },
+  "404": {
+    "title": "Page Not Found",
+    "message": "The page you are looking for does not exist.",
+    "back_home": "Back to Home"
+  }
+}

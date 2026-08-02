@@ -1,0 +1,63 @@
+{% comment %}
+  Renders a product card for the Deal Box
+  Accepts:
+  - product: {Object} Product Liquid object
+{% endcomment %}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<a href="{{ product.url | within: collection }}" class="deal-product">
+  <div class="deal-product__img">
+    <img 
+      src="{{ product.featured_image | image_url: width: 300 }}" 
+      alt="{{ product.featured_image.alt | escape }}"
+      loading="lazy"
+      width="{{ product.featured_image.width }}"
+      height="{{ product.featured_image.height }}"
+    >
+  </div>
+  
+  <div class="deal-product__title">{{ product.title | escape }}</div>
+  
+  <div class="deal-product__price">
+    <div class="deal-product__price-now">
+      <span class="currency">{{ settings.currency_code }}</span>{{ product.price | money | remove: settings.currency_code | strip }}
+    </div>
+    {%- if product.compare_at_price > product.price -%}
+      <div class="deal-product__price-was">
+        {{ product.compare_at_price | money }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if product.compare_at_price > product.price -%}
+    {%- assign saving_amount = product.compare_at_price | minus: product.price -%}
+    <div class="deal-product__discount">
+      {{ 'products.you_save' | t }} {{ saving_amount | money }}
+    </div>
+  {%- else -%}
+    <div class="deal-product__discount" style="visibility: hidden;">Spacer</div>
+  {%- endif -%}
+
+  <div class="product-card__rating" style="margin-bottom: 12px;">
+    <div class="product-card__stars">
+      {% render 'star-rating', rating: 5 %}
+    </div>
+    <div class="product-card__reviews">(24)</div>
+  </div>
+
+  <button 
+    type="button" 
+    class="btn-atc btn-atc--primary" 
+    data-add-cart 
+    data-variant-id="{{ current_variant.id }}"
+    {% unless current_variant.available %}disabled{% endunless %}
+  >
+    {% render 'icon-svg', icon: 'cart' %}
+    {% if current_variant.available %}
+      {{ 'products.add_to_cart' | t }}
+    {% else %}
+      {{ 'products.sold_out' | t }}
+    {% endif %}
+  </button>
+</a>

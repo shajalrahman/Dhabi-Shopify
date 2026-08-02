@@ -1,0 +1,100 @@
+{% comment %}
+  Renders a product card
+  Accepts:
+  - product: {Object} Product Liquid object
+{% endcomment %}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign has_color = false -%}
+{%- for option in product.options_with_values -%}
+  {%- if option.name == 'Color' or option.name == 'Colour' -%}
+    {%- assign has_color = true -%}
+    {%- assign color_option = option -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<a href="{{ product.url | within: collection }}" class="product-card">
+  <div class="product-card__header">
+    {%- if product.compare_at_price > product.price -%}
+      {%- assign discount_percentage = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+      <div class="product-card__badge">{{ discount_percentage }}% OFF</div>
+    {%- else -%}
+      <div></div> {% comment %} Spacer {% endcomment %}
+    {%- endif -%}
+    
+    <div class="product-card__header-actions">
+      <button type="button" class="product-card__wish" aria-label="{{ 'accessibility.add_to_wishlist' | t }}">
+        {% render 'icon-svg', icon: 'heart' %}
+      </button>
+    </div>
+  </div>
+
+  <div class="product-card__img">
+    <img 
+      srcset="{%- if product.featured_image.width >= 165 -%}{{ product.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+        {%- if product.featured_image.width >= 360 -%}{{ product.featured_image | image_url: width: 360 }} 360w,{%- endif -%}
+        {{ product.featured_image | image_url }} {{ product.featured_image.width }}w"
+      src="{{ product.featured_image | image_url: width: 360 }}"
+      sizes="(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw"
+      alt="{{ product.featured_image.alt | escape }}"
+      loading="lazy"
+      width="{{ product.featured_image.width }}"
+      height="{{ product.featured_image.height }}"
+    >
+  </div>
+
+  <div class="product-card__info">
+    <div class="product-card__brand">{{ product.vendor }}</div>
+    <div class="product-card__title">{{ product.title | escape }}</div>
+    
+
+
+    {% render 'price', product: product, show_savings: true %}
+    
+    {%- if has_color -%}
+      <div class="color-swatches card-colors">
+        {%- for value in color_option.values -%}
+          {%- assign variant_for_color = product.variants | where: 'title', value | first -%}
+          {%- if variant_for_color == blank -%}
+            {%- assign variant_for_color = product.variants | where: 'option1', value | first -%}
+          {%- endif -%}
+          {%- if variant_for_color == blank -%}
+             {%- assign variant_for_color = product.variants | where: 'option2', value | first -%}
+          {%- endif -%}
+          
+          {%- assign color_swatch_val = value | downcase -%}
+          {%- assign swatch_bg = color_swatch_val -%}
+          {%- if color_swatch_val == 'white' -%}
+            {%- assign swatch_bg = '#FFFFFF' -%}
+          {%- elsif color_swatch_val == 'black' -%}
+            {%- assign swatch_bg = '#000000' -%}
+          {%- endif -%}
+          
+          <button type="button" class="color-swatch {% if forloop.first %}is-active{% endif %}" 
+            data-color="{{ value }}" 
+            data-img="{{ variant_for_color.featured_image | default: product.featured_image | image_url: width: 360 }}"
+            style="background: {{ swatch_bg }};"
+            aria-label="{{ value }}"
+          ></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="product-card__atc">
+      <button 
+        type="button" 
+        class="btn-atc btn-atc--primary" 
+        data-add-cart 
+        data-variant-id="{{ current_variant.id }}"
+        {% unless current_variant.available %}disabled{% endunless %}
+      >
+        {% render 'icon-svg', icon: 'cart' %}
+        {% if current_variant.available %}
+          {{ 'products.add_to_cart' | t }}
+        {% else %}
+          {{ 'products.sold_out' | t }}
+        {% endif %}
+      </button>
+    </div>
+  </div>
+</a>

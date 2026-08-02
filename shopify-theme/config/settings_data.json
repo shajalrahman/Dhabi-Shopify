@@ -1,0 +1,22 @@
+{
+  "current": {
+    "color_navy": "#1B2B5E",
+    "color_navy_dark": "#101D42",
+    "color_navy_deeper": "#0A1330",
+    "color_gold": "#D4A745",
+    "color_gold_light": "#E8C96E",
+    "color_noon_yellow": "#FEEE00",
+    "color_success": "#22C55E",
+    "color_danger": "#EF4444",
+    "color_warning": "#F59E0B",
+    "color_info": "#3B82F6",
+    "color_body_bg": "#F8F9FC",
+    "color_body_text": "#111827",
+    "logo_height": 42,
+    "cart_drawer_enabled": true,
+    "cart_empty_message": "Your cart is empty",
+    "cart_empty_submessage": "Add some Eco Woltt products to get started!",
+    "currency_code": "AED",
+    "content_for_index": []
+  }
+}

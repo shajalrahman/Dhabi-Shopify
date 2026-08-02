@@ -1,0 +1,98 @@
+<footer class="site-footer">
+  <div class="container section-padded">
+    
+    <div class="footer__brand-header">
+      <a href="{{ routes.root_url }}" class="footer__logo">
+        {%- if settings.logo != blank -%}
+          <img src="{{ settings.logo | image_url: width: 300 }}" alt="{{ shop.name | escape }}" width="{{ settings.logo.width }}" height="{{ settings.logo.height }}" loading="lazy">
+        {%- else -%}
+          <span style="color: white; font-size: 1.5rem; font-weight: 800;">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+      <p class="footer__brand-desc">
+        {{ 'footer.brand_description' | t }}
+      </p>
+      
+      <div class="footer__subheading">{{ 'footer.keep_in_touch' | t }}</div>
+      <div class="footer__social-circles">
+        {%- if settings.social_facebook != blank -%}
+          <a href="{{ settings.social_facebook }}" class="footer__social-circle" target="_blank">FB</a>
+        {%- endif -%}
+        {%- if settings.social_twitter != blank -%}
+          <a href="{{ settings.social_twitter }}" class="footer__social-circle" target="_blank">X</a>
+        {%- endif -%}
+        {%- if settings.social_instagram != blank -%}
+          <a href="{{ settings.social_instagram }}" class="footer__social-circle" target="_blank">IG</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="footer__sections-grid">
+      {%- for block in section.blocks -%}
+        <div class="footer__col" {{ block.shopify_attributes }}>
+          <div class="footer__title">{{ block.settings.heading }}</div>
+          <ul class="footer__list">
+            {%- for link in linklists[block.settings.menu].links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+
+      {%- if section.settings.show_newsletter -%}
+        <div class="footer__col">
+          <div class="footer__title">{{ 'footer.connect_with_us' | t }}</div>
+          <div class="footer__connect">
+            {%- form 'customer', class: 'footer__pill-form' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <input type="email" name="contact[email]" class="footer__pill-input" placeholder="{{ 'footer.newsletter_placeholder' | t }}" required>
+              <button type="submit" class="footer__pill-btn">
+                {% render 'icon-svg', icon: 'chevron-right' %}
+              </button>
+            {%- endform -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="footer__copyright-strip">
+      {%- assign current_year = 'now' | date: '%Y' -%}
+      {{ 'footer.copyright' | t: year: current_year, shop_name: shop.name }}
+    </div>
+
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show newsletter signup",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Quick Links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

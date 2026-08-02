@@ -1,0 +1,126 @@
+<header class="site-header" {% if section.settings.sticky_header %}style="position: sticky; top: 0;"{% endif %}>
+  <div class="header__inner">
+    <button class="header__mobile-toggle" id="mobileMenuBtn" aria-label="{{ 'accessibility.open_menu' | t }}">
+      {% render 'icon-svg', icon: 'menu' %}
+    </button>
+
+    <a href="{{ routes.root_url }}" class="header__logo">
+      {%- if settings.logo != blank -%}
+        {%- assign logo_height = settings.logo_height -%}
+        <img src="{{ settings.logo | image_url: width: 300 }}" alt="{{ shop.name | escape }}" width="{{ settings.logo.width }}" height="{{ settings.logo.height }}" style="height: {{ logo_height }}px; width: auto;">
+      {%- else -%}
+        <span style="color: white; font-size: 1.25rem; font-weight: 800; letter-spacing: -0.5px;">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    {%- if section.settings.show_location -%}
+      <div class="header__location">
+        {% render 'icon-svg', icon: 'location' %}
+        <div>
+          <span style="opacity:0.8">{{ 'header.deliver_to' | t }}</span> 
+          <strong>{{ 'header.default_city' | t }}</strong>
+        </div>
+        {% render 'icon-svg', icon: 'chevron-down' %}
+      </div>
+    {%- endif -%}
+
+    <div class="header__search">
+      <form action="{{ routes.search_url }}" method="get" class="header__search-form" role="search">
+        <input type="hidden" name="type" value="product">
+        <input 
+          class="header__search-input" 
+          type="search" 
+          name="q" 
+          id="searchInput" 
+          placeholder="{{ 'general.search_placeholder' | t }}" 
+          autocomplete="off"
+        >
+        <button type="submit" class="header__search-btn" aria-label="{{ 'general.search' | t }}">
+          {% render 'icon-svg', icon: 'search' %}
+        </button>
+      </form>
+      {% render 'predictive-search' %}
+    </div>
+
+    <div class="header__actions">
+      {%- if section.settings.show_language -%}
+        <div class="header__action language-selector" style="font-weight: 700;">
+          {%- if request.locale.iso_code == 'en' -%}
+            <a href="/ar{{ request.path }}" style="color: inherit; text-decoration: none;">العربية</a>
+          {%- else -%}
+            {%- assign clean_path = request.path | remove_first: '/ar' -%}
+            {%- if clean_path == '' -%}{%- assign clean_path = '/' -%}{%- endif -%}
+            <a href="{{ clean_path }}" style="color: inherit; text-decoration: none;">English</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="header__action">
+          <span style="font-weight: 700;">{% if customer %}{{ customer.first_name | default: 'Account' }}{% else %}{{ 'header.log_in' | t }}{% endif %}</span>
+          {% render 'icon-svg', icon: 'user' %}
+        </a>
+      {%- endif -%}
+
+      <a href="{{ routes.account_url }}" class="header__action">
+        <span>{{ 'header.orders' | t }}</span>
+      </a>
+
+      <button type="button" class="header__action" id="cartToggle">
+        <span>{{ 'header.cart' | t }}</span>
+        {% render 'icon-svg', icon: 'cart' %}
+        <span class="header__action-badge" id="cartBadge"{% if cart.item_count == 0 %} style="display: none;"{% endif %}>{{ cart.item_count }}</span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="catnav">
+    <div class="catnav__inner section-padded">
+      <div class="catnav__links">
+        {%- if section.settings.category_menu != blank -%}
+          {%- for link in linklists[section.settings.category_menu].links -%}
+            <a href="{{ link.url }}" class="catnav__link">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="catnav__badge">{{ 'header.free_delivery_badge' | t }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "label": "Enable sticky header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_location",
+      "label": "Show location selector",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_language",
+      "label": "Show language toggle",
+      "default": true
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu (Mobile)"
+    },
+    {
+      "type": "link_list",
+      "id": "category_menu",
+      "label": "Category menu (Sub-header)"
+    }
+  ]
+}
+{% endschema %}

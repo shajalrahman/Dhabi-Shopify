@@ -1,0 +1,59 @@
+<section class="product-slider-section container section-padded fade-up" style="margin-bottom: 40px;">
+  <div class="section-header">
+    <h2 class="section-header__title">{{ section.settings.title }}</h2>
+  </div>
+
+  <div class="product-slider__track" id="{{ section.id }}-track">
+    {%- if recommendations.performed and recommendations.products_count > 0 -%}
+      {%- for product in recommendations.products -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    {%- else -%}
+      <div class="product-recommendations" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}">
+        {%- comment -%} Loaded via JS {%- endcomment -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const recContainer = document.querySelector('.product-recommendations');
+    if (recContainer) {
+      fetch(recContainer.dataset.url)
+        .then(response => response.text())
+        .then(text => {
+          const html = document.createElement('div');
+          html.innerHTML = text;
+          const recommendations = html.querySelector('.product-slider__track');
+          if (recommendations && recommendations.innerHTML.trim().length) {
+            recContainer.outerHTML = recommendations.innerHTML;
+          }
+        })
+        .catch(e => console.error(e));
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product recommendations",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "You May Also Like"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Maximum products to show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    }
+  ]
+}
+{% endschema %}

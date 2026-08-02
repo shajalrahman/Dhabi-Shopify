@@ -1,0 +1,75 @@
+<div class="marquee-banner">
+  <div class="marquee-track">
+    <!-- First instance for continuous loop -->
+    <div class="marquee-content">
+      {%- for block in section.blocks -%}
+        <div class="marquee-item" {{ block.shopify_attributes }}>
+          {% render 'icon-svg', icon: block.settings.icon %}
+          {{ block.settings.text }}
+        </div>
+        {%- unless forloop.last -%}
+          <span class="marquee-sep">•</span>
+        {%- endunless -%}
+      {%- endfor -%}
+      <span class="marquee-sep">•</span>
+    </div>
+    
+    <!-- Duplicate instance for seamless scrolling -->
+    <div class="marquee-content" aria-hidden="true">
+      {%- for block in section.blocks -%}
+        <div class="marquee-item">
+          {% render 'icon-svg', icon: block.settings.icon %}
+          {{ block.settings.text }}
+        </div>
+        {%- unless forloop.last -%}
+          <span class="marquee-sep">•</span>
+        {%- endunless -%}
+      {%- endfor -%}
+      <span class="marquee-sep">•</span>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee Banner",
+  "max_blocks": 6,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Ticker Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "check", "label": "Checkmark" },
+            { "value": "globe", "label": "Globe" },
+            { "value": "location", "label": "Location Pin" },
+            { "value": "heart", "label": "Heart" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Banner",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "check", "text": "Free Express Shipping Across UAE" } },
+        { "type": "item", "settings": { "icon": "check", "text": "100% Encrypted & Secure Checkout" } },
+        { "type": "item", "settings": { "icon": "check", "text": "7-Day Easy Hassle-Free Returns" } },
+        { "type": "item", "settings": { "icon": "check", "text": "24/7 Customer Support Service" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,61 @@
+<div class="customer-page container section-padded">
+  <div id="recover" style="display: none;">
+    <h1 class="customer-page__title">{{ 'customer.reset_password' | t }}</h1>
+    <p style="text-align: center; margin-bottom: 24px; color: var(--gray-500);">We will send you an email to reset your password.</p>
+    
+    {%- form 'recover_customer_password', class: 'customer-form' -%}
+      {{ form.errors | default_errors }}
+      
+      {%- if form.posted_successfully? -%}
+        <p class="form-status form-status-list form__message" tabindex="-1" autofocus style="color: var(--success); text-align: center;">
+          Password recovery email sent!
+        </p>
+      {%- endif -%}
+
+      <div>
+        <label for="RecoverEmail">{{ 'customer.email' | t }}</label>
+        <input type="email" name="email" id="RecoverEmail" required>
+      </div>
+      
+      <button type="submit" class="customer-form__submit" style="margin-top: 16px;">Submit</button>
+
+      <div style="text-align: center; margin-top: 16px;">
+        <a href="#login" class="customer-form__link" onclick="document.getElementById('recover').style.display='none'; document.getElementById('login').style.display='block'; return false;">Cancel</a>
+      </div>
+    {%- endform -%}
+  </div>
+
+  <div id="login">
+    <h1 class="customer-page__title">{{ 'customer.login' | t }}</h1>
+    
+    {%- form 'customer_login', class: 'customer-form' -%}
+      {{ form.errors | default_errors }}
+      
+      <div>
+        <label for="CustomerEmail">{{ 'customer.email' | t }}</label>
+        <input type="email" name="customer[email]" id="CustomerEmail" required>
+      </div>
+      
+      <div>
+        <label for="CustomerPassword">{{ 'customer.password' | t }}</label>
+        <input type="password" name="customer[password]" id="CustomerPassword" required>
+      </div>
+      
+      <div style="display: flex; justify-content: flex-end; margin-top: -8px;">
+        <a href="#recover" class="customer-form__link" style="font-size: 0.8rem; font-weight: 500;" onclick="document.getElementById('login').style.display='none'; document.getElementById('recover').style.display='block'; return false;">{{ 'customer.forgot_password' | t }}</a>
+      </div>
+
+      <button type="submit" class="customer-form__submit">{{ 'customer.submit' | t }}</button>
+
+      <div style="text-align: center; margin-top: 16px;">
+        <a href="{{ routes.account_register_url }}" class="customer-form__link">{{ 'customer.register' | t }}</a>
+      </div>
+    {%- endform -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Login"
+}
+{% endschema %}

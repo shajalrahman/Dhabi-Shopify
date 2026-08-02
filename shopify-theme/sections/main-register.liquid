@@ -1,0 +1,39 @@
+<div class="customer-page container section-padded">
+  <h1 class="customer-page__title">{{ 'customer.register' | t }}</h1>
+  
+  {%- form 'create_customer', class: 'customer-form' -%}
+    {{ form.errors | default_errors }}
+    
+    <div>
+      <label for="FirstName">{{ 'customer.first_name' | t }}</label>
+      <input type="text" name="customer[first_name]" id="FirstName" autofocus>
+    </div>
+
+    <div>
+      <label for="LastName">{{ 'customer.last_name' | t }}</label>
+      <input type="text" name="customer[last_name]" id="LastName">
+    </div>
+
+    <div>
+      <label for="Email">{{ 'customer.email' | t }}</label>
+      <input type="email" name="customer[email]" id="Email" required>
+    </div>
+    
+    <div>
+      <label for="CreatePassword">{{ 'customer.password' | t }}</label>
+      <input type="password" name="customer[password]" id="CreatePassword" required>
+    </div>
+    
+    <button type="submit" class="customer-form__submit" style="margin-top: 16px;">{{ 'customer.submit' | t }}</button>
+
+    <div style="text-align: center; margin-top: 16px;">
+      <a href="{{ routes.account_login_url }}" class="customer-form__link">{{ 'customer.login' | t }}</a>
+    </div>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "Register"
+}
+{% endschema %}

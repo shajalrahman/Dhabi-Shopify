@@ -1,0 +1,64 @@
+<section class="cat-thumbs container">
+  <div class="cat-thumbs__row">
+    {%- for block in section.blocks -%}
+      <a href="{{ block.settings.link }}" class="cat-thumb" {{ block.shopify_attributes }}>
+        <div class="cat-thumb__icon">
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 100 }}" alt="{{ block.settings.label | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+          {%- else -%}
+            <div style="width: 50px; height: 50px; background: var(--gray-300); border-radius: 50%;"></div>
+          {%- endif -%}
+        </div>
+        <div class="cat-thumb__label">{{ block.settings.label }}</div>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category Thumbnails",
+  "max_blocks": 10,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Transparent PNG recommended (100x100px)"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Category"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Thumbnails",
+      "blocks": [
+        { "type": "category", "settings": { "label": "Power Banks" } },
+        { "type": "category", "settings": { "label": "Car Chargers" } },
+        { "type": "category", "settings": { "label": "Wall Chargers" } },
+        { "type": "category", "settings": { "label": "Cables" } },
+        { "type": "category", "settings": { "label": "Earphones" } },
+        { "type": "category", "settings": { "label": "Holders" } },
+        { "type": "category", "settings": { "label": "Screen Protectors" } },
+        { "type": "category", "settings": { "label": "Stylus Pens" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

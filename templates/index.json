@@ -1,27 +1,45 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero-carousel",
-      "settings": {
-        "autoplay": true,
-        "autoplay_interval": 4
-      },
       "blocks": {
         "slide_1": {
-          "type": "slide"
+          "type": "slide",
+          "settings": {
+            "link": ""
+          }
         },
         "slide_2": {
-          "type": "slide"
+          "type": "slide",
+          "settings": {
+            "link": ""
+          }
         },
         "slide_3": {
-          "type": "slide"
+          "type": "slide",
+          "settings": {
+            "link": ""
+          }
         }
       },
       "block_order": [
         "slide_1",
         "slide_2",
         "slide_3"
-      ]
+      ],
+      "settings": {
+        "autoplay": true,
+        "autoplay_interval": 4
+      }
     },
     "category": {
       "type": "category-thumbnails",
@@ -29,49 +47,59 @@
         "cat_1": {
           "type": "category",
           "settings": {
-            "label": "Power Banks"
+            "image": "shopify://shop_images/20000_mah_power_bank_png.png",
+            "label": "Power Banks",
+            "link": ""
           }
         },
         "cat_2": {
           "type": "category",
           "settings": {
-            "label": "Car Chargers"
+            "image": "shopify://shop_images/car_holder_png.png",
+            "label": "Car Holders",
+            "link": ""
           }
         },
         "cat_3": {
           "type": "category",
           "settings": {
-            "label": "Wall Chargers"
+            "label": "Wall Chargers",
+            "link": ""
           }
         },
         "cat_4": {
           "type": "category",
           "settings": {
-            "label": "Cables"
+            "label": "Cables",
+            "link": ""
           }
         },
         "cat_5": {
           "type": "category",
           "settings": {
-            "label": "Earphones"
+            "label": "Earphones",
+            "link": ""
           }
         },
         "cat_6": {
           "type": "category",
           "settings": {
-            "label": "Holders"
+            "label": "Holders",
+            "link": ""
           }
         },
         "cat_7": {
           "type": "category",
           "settings": {
-            "label": "Screen Protectors"
+            "label": "Screen Protectors",
+            "link": ""
           }
         },
         "cat_8": {
           "type": "category",
           "settings": {
-            "label": "Stylus Pens"
+            "label": "Stylus Pens",
+            "link": ""
           }
         }
       },
@@ -84,12 +112,16 @@
         "cat_6",
         "cat_7",
         "cat_8"
-      ]
+      ],
+      "settings": {}
     },
     "deals": {
       "type": "deals-grid",
       "settings": {
-        "flash_end_time": "2026-12-31 23:59:59"
+        "flash_product": "",
+        "flash_end_time": "2026-12-31 23:59:59",
+        "bestseller_product": "",
+        "ad_link": ""
       }
     },
     "featured": {
@@ -97,6 +129,7 @@
       "settings": {
         "title": "Recommended For You",
         "subtitle": "Based on your recent activity",
+        "collection": "",
         "products_to_show": 8
       }
     },
@@ -104,16 +137,23 @@
       "type": "bottom-banners",
       "blocks": {
         "banner_1": {
-          "type": "banner"
+          "type": "banner",
+          "settings": {
+            "link": ""
+          }
         },
         "banner_2": {
-          "type": "banner"
+          "type": "banner",
+          "settings": {
+            "link": ""
+          }
         }
       },
       "block_order": [
         "banner_1",
         "banner_2"
-      ]
+      ],
+      "settings": {}
     },
     "marquee": {
       "type": "marquee-banner",
@@ -152,7 +192,8 @@
         "item_2",
         "item_3",
         "item_4"
-      ]
+      ],
+      "settings": {}
     }
   },
   "order": [

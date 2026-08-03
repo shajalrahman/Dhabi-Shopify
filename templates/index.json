@@ -15,6 +15,7 @@
         "slide_1": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/banner_ad_image.png",
             "link": ""
           }
         },

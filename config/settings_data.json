@@ -1,5 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
+    "logo": "shopify://shop_images/dhabi.jpg",
+    "logo_height": 54,
     "color_navy": "#1B2B5E",
     "color_navy_dark": "#101D42",
     "color_navy_deeper": "#0A1330",
@@ -12,11 +23,41 @@
     "color_info": "#3B82F6",
     "color_body_bg": "#F8F9FC",
     "color_body_text": "#111827",
-    "logo_height": 42,
     "cart_drawer_enabled": true,
     "cart_empty_message": "Your cart is empty",
     "cart_empty_submessage": "Add some Eco Woltt products to get started!",
     "currency_code": "AED",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "show_announcement": false,
+          "text": "Free Express Delivery across UAE for orders over 100 AED",
+          "bg_color": "#101d42",
+          "text_color": "#ffffff"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "sticky_header": true,
+          "show_location": true,
+          "show_language": true,
+          "menu": "",
+          "category_menu": ""
+        }
+      },
+      "marquee-banner": {
+        "type": "marquee-banner",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "show_newsletter": true
+        }
+      }
+    },
     "content_for_index": []
   }
 }
